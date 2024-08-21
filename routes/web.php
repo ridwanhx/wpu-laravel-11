@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // maka tampilkan/kembalikan view welcome / welcome.blade.php
     // return view('welcome');
-    return view('home');
+    return view('home', [
+        // mengirim title sebagai slot ke halaman/view home
+        'title' => 'Home Page'
+    ]);
 });
 
 // ketika ada request akses ke halaman about (kondisi ketika setelah tanda slash terdapat about atau "nama-aplikasi/about")
@@ -14,17 +17,20 @@ Route::get('/about', function () {
     // maka tampilkan/kembalikan view about / about.blade.php
     // mengirim nilai melalui route
     return view('about', [
-        'greetings' => 'Hola Guacamole',
-        'framework' => 'laravel 11'
+        'title' => 'About Page'
     ]);
 });
 
 // route ke halaman blog
 Route::get('/blog', function () {
-    return view('blog');
+    return view('blog', [
+        'title' => 'Blog Page'
+    ]);
 });
 
 // route ke halaman contact
 Route::get('/contact', function () {
-    return view('contact');
+    return view('contact', [
+        'title' => 'Contact Page'
+    ]);
 });
