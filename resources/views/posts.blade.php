@@ -10,10 +10,13 @@
     @foreach( $posts as $post )
      <article class="py-8 max-w-screen-md border-b border-gray-500">
         <a href="/posts/{{ $post['slug'] }}" class="hover:underline">
-            <h2 class="mb-1 text-3xl font-bold tracking-tight">{{ $post['judul'] }}</h2>
+            <h2 class="mb-1 text-3xl font-bold tracking-tight">{{ $post['title'] }}</h2>
         </a>
+        <!-- jika formatnya ingin seperti sebelumnya: 9 August 2024 -->
+        <!-- contoh penulisan: $post['created_at']->format('j F Y') -->
         <div class="text-base text-gray-500">
-            <a href="#">{{ $post['author'] }}</a> | 21 Agustus 2024
+            <!-- contoh penulisan dengan carbon: fitur pada laravel untuk manipulasi tanggal -->
+            <a href="#">{{ $post['author'] }}</a> | {{ $post['created_at']->diffForHumans() }}
         </div>
         <p class="my-4 font-light">
             <!-- fungsi yang ada di laravel, untuk manipulasi string "limit" -->

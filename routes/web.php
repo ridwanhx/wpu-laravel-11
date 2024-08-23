@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Post;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 // ketika ada request akses ke halaman route (kondisi ketika setelah tanda slash tidak mengirimkan apa-apa atau "nama-aplikasi/")
@@ -29,16 +28,12 @@ Route::get('/posts', function () {
 });
 
 // menangani request ke halaman blog, yang request tersebut juga mengirimkan data. Implementasi wildcard
-Route::get('/posts/{slug}', function($slug) { // kalau ada request ke halaman blog/posts, yang dimana request tersebut juga mengirimkan data, tangani data tersebut dengan menjadikannya wildcard, lalu buat function callback yang didalamnya menangkap nilai daripada wildcard tersebut.
-    $posts = Post::all();
-
-    // Fungsi Arr::first digunakan untuk mengambil elemen pertama dari array yang memenuhi kondisi tertentu.
-    // Fungsi ini menerima dua parameter, diantaranya:
-    // 1. Array yang akan dicari elemennya, dalam hal ini adalah $posts.
-    // 2. Fungsi callback yang menentukan kondisi untuk mencari elemen.
-    //    Callback ini menerima elemen saat ini ($post) dan akan mengembalikan true jika elemen memenuhi kondisi (dalam hal ini, jika 'id' pada post sama dengan $id yang diterima dari wildcard).
-    // use merupakan fungsi pada laravel yang digunakan untuk mengambil variabel global(variabel yang posisinya berada diluar lingkup saat ini) - berkaitan dengan variable scope
-    $post = Post::find($slug);
+Route::get('/posts/{post:slug}', function(Post $post) { // Route ini mendefinisikan rute untuk URL /posts/{post:slug}.
+    // {post:slug} adalah wildcard yang menangkap bagian URL yang sesuai dengan slug (misalnya, /posts/my-first-post).
+    // 'post:slug' berarti kita ingin mencari entri di database berdasarkan kolom 'slug' dalam tabel yang sesuai dengan model 'Post'.
+    // Laravel secara otomatis akan mencari Post yang memiliki slug yang cocok di database.
+    // Hasil pencarian ini kemudian diinjeksikan ke dalam fungsi sebagai objek $post.
+    // Dengan kata lain, $post akan menjadi objek dari model Post yang sesuai dengan slug yang diberikan.
 
     // kembalikan sebagai view dengan nama post
     // kirimkan variabel $post ke halaman/view post sebagai array dengan nama post
