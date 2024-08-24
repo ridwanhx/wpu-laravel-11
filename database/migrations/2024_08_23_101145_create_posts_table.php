@@ -14,7 +14,23 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('author');
+            // $table->string('author');
+
+            // Episode 10: Eloquent Relationship
+            // CARA 1
+            // assign kolom author_id
+            // $table->unsignedBigInteger('author_id');
+            // jadikan kolom author_id sebagai foreign key yang bereferensi ke kolom id di tabel users
+            // $table->foreign('author_id')->references('id')->on('users');
+
+            // CARA 2
+            // method foreignId melakukan definisi terkait nama kolom yang akan dijadikan foreign dan di set sebagai unsignedBigInteger.
+            // method constrained melakukan referensi ke tabel yang akan dituju serta mendefinisikan nama index nya.
+            // cara ini lebih ringkas dari cara pertama
+            $table->foreignId('author_id')->constrained(
+                table: 'users', indexName: 'posts_author_id'
+            );
+
             $table->string('slug')->unique();
             $table->text('body');
             $table->timestamps();

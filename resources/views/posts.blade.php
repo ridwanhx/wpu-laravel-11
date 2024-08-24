@@ -16,7 +16,7 @@
         <!-- contoh penulisan: $post['created_at']->format('j F Y') -->
         <div class="text-base text-gray-500">
             <!-- contoh penulisan dengan carbon: fitur pada laravel untuk manipulasi tanggal -->
-            <a href="#">{{ $post['author'] }}</a> | {{ $post['created_at']->diffForHumans() }}
+            <a href="/authors/{{ $post->author->id }}" class="hover:underline">{{ $post->author->name }}</a> | {{ $post['created_at']->diffForHumans() }}
         </div>
         <p class="my-4 font-light">
             <!-- fungsi yang ada di laravel, untuk manipulasi string "limit" -->

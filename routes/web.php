@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 // ketika ada request akses ke halaman route (kondisi ketika setelah tanda slash tidak mengirimkan apa-apa atau "nama-aplikasi/")
@@ -40,6 +41,14 @@ Route::get('/posts/{post:slug}', function(Post $post) { // Route ini mendefinisi
     return view('post', [
         'title' => 'Single Post',
         'post' => $post
+    ]);
+});
+
+// rute ke halaman authors
+Route::get('/authors/{user}', function(User $user) {
+    return view('posts', [
+        'title' => 'Articles by ' . $user->name,
+        'posts' => $user->posts
     ]);
 });
 
