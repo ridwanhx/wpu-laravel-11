@@ -41,4 +41,12 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    // fungsi buatan untuk mengembalikan data user yang nonaktif
+    // public function nonactivated(): static
+    // {
+    //     return $this->state(fn (array $attributes) => [
+    //         'is_active' => false,
+    //     ]);
+    // }
 }
