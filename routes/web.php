@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 // ketika ada request akses ke halaman route (kondisi ketika setelah tanda slash tidak mengirimkan apa-apa atau "nama-aplikasi/")
@@ -49,6 +50,14 @@ Route::get('/authors/{user}', function(User $user) {
     return view('posts', [
         'title' => 'Articles by ' . $user->name,
         'posts' => $user->posts
+    ]);
+});
+
+// rute ke halaman categories
+Route::get('/categories/{category}', function(Category $category) {
+    return view('posts', [
+        'title' => 'In category ' . $category->category_name,
+        'posts' => $category->posts
     ]);
 });
 
