@@ -46,9 +46,9 @@ Route::get('/posts/{post:slug}', function(Post $post) { // Route ini mendefinisi
 });
 
 // rute ke halaman authors
-Route::get('/authors/{user}', function(User $user) {
+Route::get('/authors/{user:username}', function(User $user) {
     return view('posts', [
-        'title' => 'Articles by ' . $user->name,
+        'title' => count($user->posts) . ' Articles by ' . $user->name,
         'posts' => $user->posts
     ]);
 });

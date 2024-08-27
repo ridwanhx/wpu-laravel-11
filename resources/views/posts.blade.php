@@ -14,9 +14,9 @@
         </a>
         <!-- jika formatnya ingin seperti sebelumnya: 9 August 2024 -->
         <!-- contoh penulisan: $post['created_at']->format('j F Y') -->
-        <div class="text-base text-gray-500">
+        <div>
             <!-- contoh penulisan dengan carbon: fitur pada laravel untuk manipulasi tanggal -->
-            <a href="/authors/{{ $post->author->id }}" class="hover:underline">By {{ $post->author->name }}</a> in <a href="/categories/{{ $post->category->id }}" class="hover:underline">{{ $post->category->category_name }}</a> | {{ $post['created_at']->diffForHumans() }}
+            By <a href="/authors/{{ $post->author->username }}" class="hover:underline text-base text-gray-500">{{ $post->author->name }}</a> in <a href="/categories/{{ $post->category->id }}" class="hover:underline text-base text-gray-500">{{ $post->category->category_name }}</a> | {{ $post['created_at']->diffForHumans() }}
         </div>
         <p class="my-4 font-light">
             <!-- fungsi yang ada di laravel, untuk manipulasi string "limit" -->
