@@ -26,7 +26,13 @@ Route::get('/about', function () {
 
 // route ke halaman blog
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog Page', 'posts' => Post::all()]);
+    // Lazy loading : mengeksekusi terlebih dahulu query (select * fron posts), dan hanya pada saat looping dijalankankah baru query ke users dan categories di eksekusi.
+    // Eager loading : kebalikan dari lazy loading, eager mengeksekusi semua querynya langsung dari awal.
+
+    // memanggil method with untuk menjalankan Eager loading
+    // $posts = Post::with(['author', 'category'])->latest()->get();
+
+    return view('posts', ['title' => 'Blog Page', 'posts' => Post::latest()->get()]);
 });
 
 // menangani request ke halaman blog, yang request tersebut juga mengirimkan data. Implementasi wildcard
@@ -47,6 +53,9 @@ Route::get('/posts/{post:slug}', function(Post $post) { // Route ini mendefinisi
 
 // rute ke halaman authors
 Route::get('/authors/{user:username}', function(User $user) {
+    // Memanggil method load() untuk menjalankan lazy eager loading
+    // $posts = $user->posts->load('author', 'category');
+
     return view('posts', [
         'title' => count($user->posts) . ' Articles by ' . $user->name,
         'posts' => $user->posts
@@ -55,6 +64,9 @@ Route::get('/authors/{user:username}', function(User $user) {
 
 // rute ke halaman categories
 Route::get('/categories/{category}', function(Category $category) {
+    // menjalankan lazy eager loading
+    // $posts = $category->posts->load('category', 'author');
+
     return view('posts', [
         'title' => 'In category ' . $category->category_name,
         'posts' => $category->posts

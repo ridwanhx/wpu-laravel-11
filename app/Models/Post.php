@@ -10,7 +10,11 @@ class Post extends Model
 {
     use HasFactory;
 
+    // Mendefinisikan field field apa saja yang boleh diisi
     protected $fillable = ['title', 'author', 'slug', 'body'];
+
+    // Menjalankan eager loading secara default
+    protected $with = ['author', 'category'];
 
     // deklarasi method yang mengembalikan nilai kembalian BelongsTo / nilai inverse one to many
     // tujuan dari penulisan kode ini adalah untuk memberikan relasi inverse antara post dengan user yang dimana dari skema yang sudah ditetapkan bahwasannya 1 post memiliki 1 author/user
