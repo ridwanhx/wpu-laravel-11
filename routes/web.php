@@ -63,7 +63,7 @@ Route::get('/authors/{user:username}', function(User $user) {
 });
 
 // rute ke halaman categories
-Route::get('/categories/{category}', function(Category $category) {
+Route::get('/categories/{category:slug}', function(Category $category) {
     // menjalankan lazy eager loading
     // $posts = $category->posts->load('category', 'author');
 

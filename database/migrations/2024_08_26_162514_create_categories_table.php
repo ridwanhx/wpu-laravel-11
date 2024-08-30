@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('category_name');
             $table->string('slug')->unique();
+            // menambahkan kolom baru
+            // untuk pengaturan warna tiap tiap kategori
+            $table->string('color');
             $table->timestamps();
         });
     }
