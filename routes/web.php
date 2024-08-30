@@ -32,7 +32,19 @@ Route::get('/posts', function () {
     // memanggil method with untuk menjalankan Eager loading
     // $posts = Post::with(['author', 'category'])->latest()->get();
 
-    return view('posts', ['title' => 'Blog Page', 'posts' => Post::latest()->get()]);
+    // tangkap data yang dikirimkan melalui form
+    // dump(request('search'));
+
+    // definisikan var yang menampung semua nilai order by data yang paling terbaru / latest
+    // $posts = Post::latest();
+
+    // berikan kondisi jika ada request yang dikirimkan melalui form
+    // if (request('search')) {
+        // berikan klausa where untuk mencari data berdasarkan keyword yang dikirimkan
+        // $posts->where('title', 'like', '%' . request('search') . '%');
+    // }
+
+    return view('posts', ['title' => 'Blog Page', 'posts' => Post::latest()->searching(request(['search', 'category', 'author']))->get()]);
 });
 
 // menangani request ke halaman blog, yang request tersebut juga mengirimkan data. Implementasi wildcard
@@ -52,7 +64,7 @@ Route::get('/posts/{post:slug}', function(Post $post) { // Route ini mendefinisi
 });
 
 // rute ke halaman authors
-Route::get('/authors/{user:username}', function(User $user) {
+Route::get('/author/{user:username}', function(User $user) {
     // Memanggil method load() untuk menjalankan lazy eager loading
     // $posts = $user->posts->load('author', 'category');
 
