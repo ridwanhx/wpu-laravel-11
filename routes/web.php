@@ -44,7 +44,7 @@ Route::get('/posts', function () {
         // $posts->where('title', 'like', '%' . request('search') . '%');
     // }
 
-    return view('posts', ['title' => 'Blog Page', 'posts' => Post::latest()->searching(request(['search', 'category', 'author']))->get()]);
+    return view('posts', ['title' => 'Blog Page', 'posts' => Post::latest()->searching(request(['search', 'category', 'author']))->paginate(9)->withQueryString()]);
 });
 
 // menangani request ke halaman blog, yang request tersebut juga mengirimkan data. Implementasi wildcard

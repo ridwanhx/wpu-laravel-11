@@ -10,10 +10,10 @@
             <form>
                 <!-- Jika ada request ke halaman category -->
                 @if (request('category'))
-                <!-- Definisikan input yang type nya hidden yang akan mengirimkan name sebagai category dan mengirimkan nilai yaitu request category nya -->
-                <input type="hidden" name="category" value="{{ request('category') }}">
+                    <!-- Definisikan input yang type nya hidden yang akan mengirimkan name sebagai category dan mengirimkan nilai yaitu request category nya -->
+                    <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
-                
+
                 <!-- Jika ada request ke halaman author -->
                 @if (request('author'))
                     <input type="hidden" name="author" value="{{ request('author') }}">
@@ -33,7 +33,8 @@
                         </div>
                         <input
                             class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Search for article" type="search" id="search" name="search" autofocus autocomplete="off">
+                            placeholder="Search for article" type="search" id="search" name="search" autofocus
+                            autocomplete="off">
                     </div>
                     <div>
                         <button type="submit"
@@ -42,15 +43,20 @@
                 </div>
                 @forelse ($posts as $post)
                     <span style="display: none"></span>
-                    @empty
-                        <span class="text-center text-xl capitalize font-light text-gray-500 dark:text-gray-400 block my-20">Articles not found.</span>
+                @empty
+                    <span
+                        class="text-center text-xl capitalize font-light text-gray-500 dark:text-gray-400 block my-20">Articles
+                        not found.</span>
                 @endforelse
             </form>
         </div>
     </div>
 
+    <!-- fitur pagination -->
+    {{ $posts->links() }}
+
     <!-- artikels -->
-    <div class="py-4 mx-auto max-w-screen-xl lg:py-8">
+    <div class="py-8 mx-auto max-w-screen-xl lg:py-8">
         <div class="grid gap-8 lg:grid-cols-3 md:grid-cols-2">
             <!-- penulisan looping dengan blade directive looping -->
             @foreach ($posts as $post)
@@ -98,5 +104,9 @@
                 </article>
             @endforeach
         </div>
+    </div>
+    <!-- fitur pagination -->
+    <div class="mb-8">
+        {{ $posts->links() }}
     </div>
 </x-layout>
